@@ -1,0 +1,131 @@
+{
+  "npm": {
+    "event-stream": {
+      "reason": "Compromised in 2018 - injected cryptocurrency-stealing code via flatmap-stream",
+      "reference": "https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident"
+    },
+    "flatmap-stream": {
+      "reason": "Malicious dependency injected into event-stream supply chain attack",
+      "reference": "https://snyk.io/blog/malicious-code-found-in-npm-package-event-stream/"
+    },
+    "crossenv": {
+      "reason": "Typosquat of cross-env - steals environment variables",
+      "reference": "https://blog.npmjs.org/post/163723642530/crossenv-malware-on-the-npm-registry"
+    },
+    "eslint-scope": {
+      "reason": "Compromised version 3.7.2 stole npm tokens",
+      "reference": "https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes"
+    },
+    "getcookies": {
+      "reason": "Backdoor that creates remote access via HTTP headers",
+      "reference": "https://blog.npmjs.org/post/173526807575/reported-malicious-module-getcookies"
+    },
+    "coa": {
+      "reason": "Compromised versions 2.0.3+ injected malicious code",
+      "reference": "https://github.com/veged/coa/issues/99"
+    },
+    "rc": {
+      "reason": "Compromised versions injected malicious code (Nov 2021)",
+      "reference": "https://github.com/nicknisi/env/issues/1"
+    },
+    "ua-parser-js": {
+      "reason": "Versions 0.7.29, 0.8.0, 1.0.0 contained cryptominer and password stealer",
+      "reference": "https://github.com/nicknisi/env/issues/1"
+    },
+    "colors": {
+      "reason": "Author intentionally corrupted v1.4.1+ with infinite loop (protestware)",
+      "reference": "https://www.bleepingcomputer.com/news/security/dev-corrupts-npm-libs-colors-and-faker-breaking-thousands-of-apps/"
+    },
+    "faker": {
+      "reason": "Author intentionally corrupted v6.6.6 (protestware)",
+      "reference": "https://www.bleepingcomputer.com/news/security/dev-corrupts-npm-libs-colors-and-faker-breaking-thousands-of-apps/"
+    },
+    "node-ipc": {
+      "reason": "Versions 10.1.1-10.1.2 contained peacenotwar protestware targeting Russian/Belarusian IPs",
+      "reference": "https://snyk.io/blog/peacenotwar-malicious-npm-node-ipc-package-vulnerability/"
+    },
+    "lodahs": {
+      "reason": "Typosquat of lodash",
+      "reference": "known-typosquat"
+    },
+    "lodashs": {
+      "reason": "Typosquat of lodash",
+      "reference": "known-typosquat"
+    },
+    "babelcli": {
+      "reason": "Typosquat of babel-cli",
+      "reference": "known-typosquat"
+    },
+    "mongose": {
+      "reason": "Typosquat of mongoose",
+      "reference": "known-typosquat"
+    },
+    "expresss": {
+      "reason": "Typosquat of express",
+      "reference": "known-typosquat"
+    },
+    "require-port": {
+      "reason": "Typosquat of requires-port, contains credential stealer",
+      "reference": "known-typosquat"
+    },
+    "discord.jss": {
+      "reason": "Typosquat of discord.js - steals Discord tokens",
+      "reference": "known-typosquat"
+    },
+    "electorn": {
+      "reason": "Typosquat of electron",
+      "reference": "known-typosquat"
+    }
+  },
+  "pypi": {
+    "python3-dateutil": {
+      "reason": "Typosquat of python-dateutil - contained credential stealer",
+      "reference": "https://snyk.io/blog/malicious-packages-found-to-be-typo-squatting-in-pypi/"
+    },
+    "jeIlyfish": {
+      "reason": "Typosquat of jellyfish (capital I instead of lowercase l) - stole SSH keys",
+      "reference": "https://snyk.io/blog/malicious-packages-found-to-be-typo-squatting-in-pypi/"
+    },
+    "python-mongo": {
+      "reason": "Typosquat of pymongo - contained reverse shell",
+      "reference": "known-typosquat"
+    },
+    "coloursama": {
+      "reason": "Typosquat of colorama - information stealer",
+      "reference": "known-typosquat"
+    },
+    "djanga": {
+      "reason": "Typosquat of django",
+      "reference": "known-typosquat"
+    },
+    "numppy": {
+      "reason": "Typosquat of numpy",
+      "reference": "known-typosquat"
+    },
+    "requessts": {
+      "reason": "Typosquat of requests",
+      "reference": "known-typosquat"
+    },
+    "beautifulsup4": {
+      "reason": "Typosquat of beautifulsoup4",
+      "reference": "known-typosquat"
+    },
+    "ctx": {
+      "reason": "Hijacked package - stole environment variables and AWS keys (May 2022)",
+      "reference": "https://socket.dev/blog/pypi-ctx-package-compromised"
+    },
+    "phpass": {
+      "reason": "Hijacked package - data exfiltration",
+      "reference": "https://socket.dev/blog/pypi-phpass-package-compromised"
+    }
+  },
+  "patterns": {
+    "npm": [
+      {
+        "pattern": "@toptal/*",
+        "reason": "Known scope used in dependency confusion attacks"
+      }
+    ],
+    "pypi": []
+  }
+}

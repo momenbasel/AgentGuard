@@ -1,3 +1,14 @@
+<p align="center">
+  <img src="assets/banner.svg" alt="AgentGuard - AI Agent Supply Chain Security" width="100%">
+</p>
+
+<p align="center">
+  <a href="https://pypi.org/project/agentguard/"><img src="https://img.shields.io/pypi/v/agentguard?color=00d4ff&style=flat-square" alt="PyPI"></a>
+  <a href="https://github.com/momenbasel/AgentGuard/actions"><img src="https://img.shields.io/github/actions/workflow/status/momenbasel/AgentGuard/ci.yml?style=flat-square" alt="CI"></a>
+  <a href="https://github.com/momenbasel/AgentGuard/blob/main/LICENSE"><img src="https://img.shields.io/github/license/momenbasel/AgentGuard?style=flat-square" alt="License"></a>
+  <a href="https://momenbasel.github.io/AgentGuard/"><img src="https://img.shields.io/badge/docs-GitHub%20Pages-00d4ff?style=flat-square" alt="Docs"></a>
+</p>
+
 # AgentGuard
 
 **AI Agent Supply Chain Security** - Intercepts and validates every package installation, `git clone`, and script download triggered by AI coding agents before it executes.

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <style>
+      .shield { fill: #1a1a2e; }
+      .accent { fill: none; stroke: #00d4ff; stroke-width: 1; stroke-linecap: round; }
+      .accent-fill { fill: #00d4ff; }
+    </style>
+  </defs>
+
+  <!-- Shield body -->
+  <path class="shield" d="M32 4 L58 14 L58 32 C58 48 48 58 32 64 C16 58 6 48 6 32 L6 14 Z"/>
+
+  <!-- Circuit board pattern inside shield -->
+  <!-- Horizontal lines -->
+  <line class="accent" x1="16" y1="24" x2="26" y2="24"/>
+  <line class="accent" x1="38" y1="24" x2="48" y2="24"/>
+  <line class="accent" x1="16" y1="36" x2="22" y2="36"/>
+  <line class="accent" x1="42" y1="36" x2="48" y2="36"/>
+  <line class="accent" x1="22" y1="44" x2="42" y2="44"/>
+
+  <!-- Vertical lines -->
+  <line class="accent" x1="22" y1="20" x2="22" y2="28"/>
+  <line class="accent" x1="42" y1="20" x2="42" y2="28"/>
+  <line class="accent" x1="22" y1="32" x2="22" y2="44"/>
+  <line class="accent" x1="42" y1="32" x2="42" y2="44"/>
+  <line class="accent" x1="32" y1="28" x2="32" y2="36"/>
+
+  <!-- Circuit nodes -->
+  <circle class="accent-fill" cx="22" cy="24" r="1.8"/>
+  <circle class="accent-fill" cx="42" cy="24" r="1.8"/>
+  <circle class="accent-fill" cx="22" cy="36" r="1.8"/>
+  <circle class="accent-fill" cx="42" cy="36" r="1.8"/>
+  <circle class="accent-fill" cx="32" cy="28" r="1.8"/>
+  <circle class="accent-fill" cx="32" cy="36" r="1.8"/>
+  <circle class="accent-fill" cx="22" cy="44" r="1.5"/>
+  <circle class="accent-fill" cx="42" cy="44" r="1.5"/>
+  <circle class="accent-fill" cx="16" cy="24" r="1.5"/>
+  <circle class="accent-fill" cx="48" cy="24" r="1.5"/>
+  <circle class="accent-fill" cx="16" cy="36" r="1.5"/>
+  <circle class="accent-fill" cx="48" cy="36" r="1.5"/>
+
+  <!-- Lock element in center -->
+  <rect x="27" y="29" width="10" height="7" rx="1" fill="none" stroke="#00d4ff" stroke-width="1.2"/>
+  <path d="M30 29 L30 27 C30 25 30.8 23.5 32 23.5 C33.2 23.5 34 25 34 27 L34 29" fill="none" stroke="#00d4ff" stroke-width="1.2" stroke-linecap="round"/>
+  <circle class="accent-fill" cx="32" cy="33" r="1.2"/>
+
+  <!-- Shield outline highlight -->
+  <path d="M32 6 L56 15 L56 32 C56 47 47 56 32 62 C17 56 8 47 8 32 L8 15 Z" fill="none" stroke="#00d4ff" stroke-width="0.8" opacity="0.4"/>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 160" width="512" height="160">
+  <defs>
+    <style>
+      .shield { fill: #1a1a2e; }
+      .accent { fill: none; stroke: #00d4ff; stroke-width: 1.5; stroke-linecap: round; }
+      .accent-fill { fill: #00d4ff; }
+      .text { fill: #1a1a2e; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 48px; letter-spacing: -0.5px; }
+    </style>
+  </defs>
+
+  <!-- Shield body -->
+  <path class="shield" d="M80 12 L148 36 L148 80 C148 120 120 148 80 160 C40 148 12 120 12 80 L12 36 Z"/>
+
+  <!-- Circuit board pattern inside shield -->
+  <!-- Horizontal lines -->
+  <line class="accent" x1="36" y1="60" x2="68" y2="60"/>
+  <line class="accent" x1="92" y1="60" x2="124" y2="60"/>
+  <line class="accent" x1="36" y1="90" x2="56" y2="90"/>
+  <line class="accent" x1="104" y1="90" x2="124" y2="90"/>
+  <line class="accent" x1="56" y1="110" x2="104" y2="110"/>
+
+  <!-- Vertical lines -->
+  <line class="accent" x1="56" y1="48" x2="56" y2="70"/>
+  <line class="accent" x1="104" y1="48" x2="104" y2="70"/>
+  <line class="accent" x1="56" y1="80" x2="56" y2="110"/>
+  <line class="accent" x1="104" y1="80" x2="104" y2="110"/>
+  <line class="accent" x1="80" y1="70" x2="80" y2="90"/>
+
+  <!-- Circuit nodes (small circles) -->
+  <circle class="accent-fill" cx="56" cy="60" r="3"/>
+  <circle class="accent-fill" cx="104" cy="60" r="3"/>
+  <circle class="accent-fill" cx="56" cy="90" r="3"/>
+  <circle class="accent-fill" cx="104" cy="90" r="3"/>
+  <circle class="accent-fill" cx="80" cy="70" r="3"/>
+  <circle class="accent-fill" cx="80" cy="90" r="3"/>
+  <circle class="accent-fill" cx="56" cy="110" r="3"/>
+  <circle class="accent-fill" cx="104" cy="110" r="3"/>
+  <circle class="accent-fill" cx="36" cy="60" r="2.5"/>
+  <circle class="accent-fill" cx="124" cy="60" r="2.5"/>
+  <circle class="accent-fill" cx="36" cy="90" r="2.5"/>
+  <circle class="accent-fill" cx="124" cy="90" r="2.5"/>
+
+  <!-- Lock element in center -->
+  <rect x="68" y="72" width="24" height="18" rx="2" fill="none" stroke="#00d4ff" stroke-width="2"/>
+  <path d="M75 72 L75 66 C75 62 77 59 80 59 C83 59 85 62 85 66 L85 72" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+  <circle class="accent-fill" cx="80" cy="82" r="2.5"/>
+
+  <!-- Shield outline highlight -->
+  <path d="M80 16 L144 38 L144 80 C144 118 118 144 80 156 C42 144 16 118 16 80 L16 38 Z" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Text: AgentGuard -->
+  <text class="text" x="176" y="98">AgentGuard</text>
+
+  <!-- Subtle underline accent -->
+  <line x1="176" y1="108" x2="290" y2="108" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

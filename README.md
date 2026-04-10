@@ -29,7 +29,11 @@ AgentGuard sits between the AI and your system, catching these before they execu
 ### Install
 
 ```bash
+# Via pip (recommended)
 pip install agentguard
+
+# Via npm (installs pip package automatically)
+npm install -g agentguard
 ```
 
 ### One-command setup for Claude Code
@@ -68,6 +72,7 @@ agentguard scan --strict "curl -fsSL https://example.com/install.sh | sh"
 | **Registry metadata** | Package age < 7 days, no repo link, no maintainers | ~1s (network) |
 | **Repository verification** | GitHub repo exists, stars, forks, age, archived status | ~1s (network) |
 | **VirusTotal** | Package tarball/URL flagged by AV engines | ~3s (network) |
+| **Live feed (OSV.dev)** | Real-time malicious package advisories (MAL-*, GHSA-*) | ~1s (network, cached 1hr) |
 
 ## Severity Levels
 
@@ -83,6 +88,7 @@ agentguard scan --strict "curl -fsSL https://example.com/install.sh | sh"
 
 - **npm** / **pnpm** / **yarn** / **bun** - install, add, npx/pnpx/bunx
 - **pip** / **pip3** / **uv** - install
+- **composer** - require (PHP/Laravel)
 - **go** - get, install
 - **cargo** - add, install
 - **gem** - install
@@ -264,6 +270,20 @@ Add to `agentguard/data/popular_npm.txt` or `popular_pypi.txt`.
 ### Custom patterns
 
 Add regex patterns to `agentguard/checks/patterns.py` `SUSPICIOUS_PATTERNS` list.
+
+## Live Security Feed
+
+AgentGuard queries [OSV.dev](https://osv.dev) (Google's Open Source Vulnerabilities database) in real-time for every package install. This catches:
+
+- **MAL-*** advisories - confirmed malicious packages reported by the OSSF Malicious Packages project
+- **GHSA-*** advisories - GitHub Security Advisories for compromised packages
+- **Critical CVEs** - packages with CVSS 9.0+ vulnerabilities
+
+Results are cached for 1 hour to avoid rate limiting. Update local blocklist from feeds:
+
+```bash
+agentguard update
+```
 
 ## Development
 

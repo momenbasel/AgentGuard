@@ -1,0 +1,37 @@
+{
+  "name": "agentguard",
+  "version": "0.1.0",
+  "description": "AI Agent Supply Chain Security - intercepts and validates every package install, git clone, and script download triggered by AI coding agents",
+  "keywords": [
+    "security",
+    "supply-chain",
+    "ai-agent",
+    "claude-code",
+    "codex",
+    "copilot",
+    "mcp",
+    "hook",
+    "typosquatting",
+    "package-security",
+    "vibe-coding"
+  ],
+  "homepage": "https://github.com/momenbasel/AgentGuard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/momenbasel/AgentGuard.git"
+  },
+  "license": "MIT",
+  "author": "Moamen Basel",
+  "bin": {
+    "agentguard-setup": "./scripts/npm-postinstall.sh"
+  },
+  "scripts": {
+    "postinstall": "echo 'AgentGuard installed. Run: pip install agentguard && agentguard install --global'"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "skill.md",
+    "scripts/"
+  ]
+}

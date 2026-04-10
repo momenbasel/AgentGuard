@@ -149,6 +149,33 @@ def test_npm_ci_no_packages():
     assert all(len(a.packages) == 0 for a in actions) or len(actions) == 0
 
 
+def test_composer_require():
+    actions = parse_command("composer require laravel/framework")
+    assert len(actions) == 1
+    assert actions[0].action == "install"
+    assert actions[0].packages[0].name == "laravel/framework"
+    assert actions[0].packages[0].manager == "composer"
+
+
+def test_composer_require_with_version():
+    actions = parse_command("composer require guzzlehttp/guzzle:^7.0")
+    assert len(actions) == 1
+    assert actions[0].packages[0].name == "guzzlehttp/guzzle"
+    assert actions[0].packages[0].version == "^7.0"
+
+
+def test_composer_require_dev():
+    actions = parse_command("composer require --dev phpunit/phpunit")
+    assert len(actions) == 1
+    assert actions[0].packages[0].name == "phpunit/phpunit"
+
+
+def test_composer_global_require():
+    actions = parse_command("composer global require laravel/installer")
+    assert len(actions) == 1
+    assert actions[0].packages[0].name == "laravel/installer"
+
+
 def test_local_path_ignored():
     actions = parse_command("npm install ./local-package")
     # Local paths should be ignored

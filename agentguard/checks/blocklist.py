@@ -84,4 +84,6 @@ def _normalize_manager(manager: str) -> str:
         return "npm"
     if manager in pip_family:
         return "pypi"
+    if manager == "composer":
+        return "composer"
     return manager

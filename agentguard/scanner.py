@@ -13,6 +13,7 @@ from agentguard.checks.blocklist import BlocklistChecker
 from agentguard.checks.repo import RepoChecker
 from agentguard.checks.patterns import PatternChecker
 from agentguard.checks.virustotal import VirusTotalChecker
+from agentguard.checks.feed import FeedChecker
 
 
 @dataclass
@@ -81,6 +82,7 @@ def scan_command(command: str, config: Optional[Config] = None) -> ScanResult:
     repo = RepoChecker(config) if config.check_repo else None
     patterns = PatternChecker() if config.check_patterns else None
     vt = VirusTotalChecker(config) if getattr(config, "check_virustotal", False) else None
+    feed = FeedChecker() if getattr(config, "check_feed", True) else None
 
     # Run pattern checks on the full command
     if patterns:
@@ -116,6 +118,18 @@ def scan_command(command: str, config: Optional[Config] = None) -> ScanResult:
                         details={"reason": bl_result.reason, "reference": bl_result.reference},
                     ))
                     continue  # No need for further checks
+
+            # Live feed check (OSV.dev)
+            if feed:
+                feed_result = feed.check_package(pkg.full_name, pkg.manager, pkg.version)
+                if feed_result:
+                    result.findings.append(Finding(
+                        severity=feed_result.severity,
+                        category="feed",
+                        package=pkg.full_name,
+                        message=f"OSV advisory: {feed_result.reason}",
+                        details={"reference": feed_result.reference},
+                    ))
 
             # Typosquatting check
             if typosquat:

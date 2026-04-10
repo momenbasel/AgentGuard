@@ -28,6 +28,7 @@ class Config:
     check_repo: bool = True
     check_patterns: bool = True
     check_virustotal: bool = False  # requires VT_API_KEY env var
+    check_feed: bool = True  # live feed from OSV.dev (Google's vuln database)
     typosquat_threshold: int = 2  # max edit distance
     min_package_age_days: int = 7
     min_downloads: int = 100

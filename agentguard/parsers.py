@@ -136,6 +136,10 @@ def _parse_tokens(tokens: list[str], raw: str) -> Optional[CommandAction]:
     if cmd == "brew" and len(tokens) > 1 and tokens[1] == "install":
         return _parse_brew(tokens, raw)
 
+    # composer (PHP/Laravel)
+    if cmd == "composer":
+        return _parse_composer(tokens, raw)
+
     # Skills install
     if cmd == "npx" or (len(tokens) > 1 and "skills" in tokens):
         return _parse_skills_install(tokens, raw)
@@ -383,6 +387,47 @@ def _parse_brew(tokens: list[str], raw: str) -> Optional[CommandAction]:
         if tok.startswith("-"):
             continue
         packages.append(PackageRef(manager="brew", name=tok))
+
+    if packages:
+        return CommandAction(action="install", packages=packages, raw_command=raw)
+    return None
+
+
+def _parse_composer(tokens: list[str], raw: str) -> Optional[CommandAction]:
+    """Parse composer require/install commands (PHP/Laravel)."""
+    if len(tokens) < 2:
+        return None
+
+    subcmd = tokens[1]
+    if subcmd not in ("require", "install", "update", "global"):
+        return None
+
+    # Handle 'composer global require'
+    start_idx = 2
+    if subcmd == "global" and len(tokens) > 2 and tokens[2] == "require":
+        start_idx = 3
+
+    if subcmd == "install":
+        # composer install (from lock file) - no specific packages
+        return None
+
+    packages = []
+    skip_next = False
+    for i, tok in enumerate(tokens[start_idx:], start=start_idx):
+        if skip_next:
+            skip_next = False
+            continue
+        if tok.startswith("-"):
+            if tok in ("--dev", "-W", "--with-all-dependencies"):
+                continue
+            skip_next = True
+            continue
+        # Composer packages: vendor/package[:version]
+        name = tok
+        version = None
+        if ":" in name:
+            name, version = name.split(":", 1)
+        packages.append(PackageRef(manager="composer", name=name, version=version))
 
     if packages:
         return CommandAction(action="install", packages=packages, raw_command=raw)

@@ -10,6 +10,7 @@ def _config_no_network():
     config.check_registry = False
     config.check_repo = False
     config.check_virustotal = False
+    config.check_feed = False
     return config
 
 

@@ -35,6 +35,8 @@ class RegistryChecker:
             return self._check_npm(pkg)
         if pkg.manager in ("pip", "pip3", "uv"):
             return self._check_pypi(pkg)
+        if pkg.manager == "composer":
+            return self._check_packagist(pkg)
         return RegistryResult(message="Registry check not supported for this manager")
 
     def _check_npm(self, pkg: PackageRef) -> RegistryResult:
@@ -152,5 +154,68 @@ class RegistryChecker:
 
         if issues:
             result.message = f"PyPI '{pkg.name}': {', '.join(issues)}"
+
+        return result
+
+    def _check_packagist(self, pkg: PackageRef) -> RegistryResult:
+        """Check Packagist (PHP/Composer) for package metadata."""
+        name = pkg.name  # format: vendor/package
+        if "/" not in name:
+            return RegistryResult(message=f"Composer package '{name}' missing vendor prefix")
+
+        url = f"https://repo.packagist.org/p2/{name}.json"
+
+        try:
+            req = urllib.request.Request(url)
+            with urllib.request.urlopen(req, timeout=self.config.registry_timeout) as resp:
+                data = json.loads(resp.read())
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                return RegistryResult(
+                    exists=False,
+                    is_suspect=True,
+                    message=f"Composer package '{name}' not found on Packagist",
+                )
+            return RegistryResult(error=f"Packagist error: {e.code}")
+        except Exception as e:
+            return RegistryResult(error=f"Packagist unreachable: {e}")
+
+        result = RegistryResult()
+        issues = []
+
+        # Packagist p2 API returns packages.{name} array
+        packages = data.get("packages", {}).get(name, [])
+        if not packages:
+            result.exists = False
+            result.is_suspect = True
+            return RegistryResult(
+                exists=False, is_suspect=True,
+                message=f"Composer package '{name}' has no versions",
+            )
+
+        # Check latest version metadata
+        latest = packages[0] if packages else {}
+
+        # Check source/dist
+        source = latest.get("source", {})
+        if not source.get("url"):
+            result.has_repo = False
+            issues.append("no source repository")
+
+        # Check time
+        release_time = latest.get("time")
+        if release_time:
+            try:
+                dt = datetime.fromisoformat(release_time.replace("Z", "+00:00"))
+                age = (datetime.now(timezone.utc) - dt).days
+                result.age_days = age
+                if age < self.config.min_package_age_days:
+                    result.is_suspect = True
+                    issues.append(f"latest release only {age} days old")
+            except (ValueError, TypeError):
+                pass
+
+        if issues:
+            result.message = f"Packagist '{name}': {', '.join(issues)}"
 
         return result

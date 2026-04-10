@@ -53,6 +53,9 @@ def main():
     # uninstall
     subparsers.add_parser("uninstall", help="Remove Claude Code hooks")
 
+    # update
+    subparsers.add_parser("update", help="Update blocklist from live security feeds (OSV.dev)")
+
     # mcp
     subparsers.add_parser("mcp", help="Run as MCP server (stdio transport)")
 
@@ -75,6 +78,8 @@ def main():
         _cmd_uninstall()
     elif args.command == "config":
         _cmd_config(args)
+    elif args.command == "update":
+        _cmd_update()
     elif args.command == "mcp":
         from agentguard.mcp_server import serve
         serve()
@@ -219,6 +224,16 @@ def _cmd_uninstall():
 
     if not removed:
         print("No AgentGuard hooks found to remove")
+
+
+def _cmd_update():
+    """Update blocklist from live security feeds."""
+    from agentguard.checks.feed import FeedChecker
+
+    blocklist_path = Path(__file__).parent / "data" / "blocklist.json"
+    feed = FeedChecker()
+    count = feed.update_blocklist(blocklist_path)
+    print(f"Blocklist updated: {count} new entries added")
 
 
 def _cmd_config(args):

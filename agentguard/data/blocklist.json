@@ -119,6 +119,12 @@
       "reference": "https://socket.dev/blog/pypi-phpass-package-compromised"
     }
   },
+  "composer": {
+    "nelexa/zip": {
+      "reason": "Reported malicious package with data exfiltration",
+      "reference": "packagist-advisory"
+    }
+  },
   "patterns": {
     "npm": [
       {

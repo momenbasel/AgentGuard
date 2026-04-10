@@ -44,6 +44,7 @@ class TyposquatChecker:
         self.threshold = threshold
         self._popular_npm: Optional[set[str]] = None
         self._popular_pypi: Optional[set[str]] = None
+        self._popular_composer: Optional[set[str]] = None
 
     def _load_popular(self, manager: str) -> set[str]:
         """Load popular package names for a given manager."""
@@ -66,13 +67,21 @@ class TyposquatChecker:
             self._popular_pypi = self._load_popular("pypi")
         return self._popular_pypi
 
+    @property
+    def popular_composer(self) -> set[str]:
+        if self._popular_composer is None:
+            self._popular_composer = self._load_popular("composer")
+        return self._popular_composer
+
     def _get_popular_for(self, manager: str) -> set[str]:
         """Get the correct popular set for a package manager."""
         if manager in ("npm", "pnpm", "yarn", "bun", "npx"):
             return self.popular_npm
         if manager in ("pip", "pip3", "uv"):
             return self.popular_pypi
-        return self.popular_npm | self.popular_pypi
+        if manager == "composer":
+            return self.popular_composer
+        return self.popular_npm | self.popular_pypi | self.popular_composer
 
     def check(self, pkg: PackageRef) -> TyposquatResult:
         """Check a package for typosquatting similarity to popular packages."""

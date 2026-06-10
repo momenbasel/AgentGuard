@@ -312,6 +312,14 @@ AI coding agents are increasingly autonomous. They read instructions, write code
 
 This is the seatbelt for vibe coding.
 
+
+## Professional services
+
+AgentGuard is built and maintained by [GreyCore Labs](https://greycorelabs.com), a US-incorporated offensive security firm. Want the same eye on your own product?
+
+- [Penetration testing](https://greycorelabs.com/#plans) - web, API, mobile, cloud. Fixed quote within 24 hours, redacted sample report on request.
+- [Free external attack-surface scan](https://greycorelabs.com/#free-scan) - one-page report in 48 hours, no strings attached.
+
 ## License
 
 MIT
